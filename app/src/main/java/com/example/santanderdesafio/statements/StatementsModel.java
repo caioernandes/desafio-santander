@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class StatementModel implements Serializable {
+public class StatementsModel implements Serializable {
 
     @SerializedName("title")
     private String title;
@@ -50,11 +50,11 @@ public class StatementModel implements Serializable {
         this.value = value;
     }
 
-    public StatementModel() {
+    public StatementsModel() {
 
     }
 
-    public StatementModel(String title, String description, String date, float value) {
+    public StatementsModel(String title, String description, String date, float value) {
         this.title = title;
         this.description = description;
         this.date = date;
