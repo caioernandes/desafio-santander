@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.santanderdesafio.utils;
+package com.example.santanderdesafio.helpers;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -39,6 +39,7 @@ import java.security.cert.CertificateEncodingException;
 import java.security.spec.RSAKeyGenParameterSpec;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Objects;
 
 import javax.crypto.Cipher;
 import javax.crypto.NoSuchPaddingException;
@@ -46,9 +47,9 @@ import javax.security.auth.x500.X500Principal;
 
 import static java.security.spec.RSAKeyGenParameterSpec.F4;
 
-public class KeyStoreHelper {
+public class KeyStoreSecurely {
 
-    public static final String TAG = "KeyStoreHelper";
+    private static final String TAG = "KeyStoreSecurely";
 
     /**
      * Creates a public and private key and stores it using the Android Key
@@ -58,8 +59,8 @@ public class KeyStoreHelper {
             NoSuchAlgorithmException, InvalidAlgorithmParameterException {
         if (!isSigningKey(alias)) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                createKeysM(alias, false);
-            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                createKeysM(alias);
+            } else {
                 createKeysJBMR2(context, alias);
             }
         }
@@ -67,7 +68,7 @@ public class KeyStoreHelper {
 
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    static void createKeysJBMR2(Context context, String alias) throws NoSuchProviderException,
+    private static void createKeysJBMR2(Context context, String alias) throws NoSuchProviderException,
             NoSuchAlgorithmException, InvalidAlgorithmParameterException {
 
         Calendar start = new GregorianCalendar();
@@ -94,7 +95,7 @@ public class KeyStoreHelper {
     }
 
     @TargetApi(Build.VERSION_CODES.M)
-    static void createKeysM(String alias, boolean requireAuth) {
+    private static void createKeysM(String alias) {
         try {
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(
                     KeyProperties.KEY_ALGORITHM_RSA, SecurityConstants.KEYSTORE_PROVIDER_ANDROID_KEYSTORE);
@@ -110,7 +111,7 @@ public class KeyStoreHelper {
                                     KeyProperties.DIGEST_SHA512)
                             // Only permit the private key to be used if the user authenticated
                             // within the last five minutes.
-                            .setUserAuthenticationRequired(requireAuth)
+                            .setUserAuthenticationRequired(false)
                             .build());
             KeyPair keyPair = keyPairGenerator.generateKeyPair();
             Log.d(TAG, "Public Key is: " + keyPair.getPublic().toString());
@@ -185,7 +186,7 @@ public class KeyStoreHelper {
 
     public static String encrypt(String alias, String plaintext) {
         try {
-            PublicKey publicKey = getPrivateKeyEntry(alias).getCertificate().getPublicKey();
+            PublicKey publicKey = Objects.requireNonNull(getPrivateKeyEntry(alias)).getCertificate().getPublicKey();
             Cipher cipher = getCipher();
             cipher.init(Cipher.ENCRYPT_MODE, publicKey);
             return Base64.encodeToString(cipher.doFinal(plaintext.getBytes()), Base64.NO_WRAP);
@@ -196,7 +197,7 @@ public class KeyStoreHelper {
 
     public static String decrypt(String alias, String ciphertext) {
         try {
-            PrivateKey privateKey = getPrivateKeyEntry(alias).getPrivateKey();
+            PrivateKey privateKey = Objects.requireNonNull(getPrivateKeyEntry(alias)).getPrivateKey();
             Cipher cipher = getCipher();
             cipher.init(Cipher.DECRYPT_MODE, privateKey);
             return new String(cipher.doFinal(Base64.decode(ciphertext, Base64.NO_WRAP)));
@@ -226,9 +227,9 @@ public class KeyStoreHelper {
 }
 
 /*
-  * String encrypted = KeyStoreHelper.encrypt(KEYSTORE_KEY_ALIAS, "Hello World");
-    String decrypted = KeyStoreHelper.decrypt(KEYSTORE_KEY_ALIAS, encrypted);
+  * String encrypted = KeyStoreSecurely.encrypt(KEYSTORE_KEY_ALIAS, "Hello World");
+    String decrypted = KeyStoreSecurely.decrypt(KEYSTORE_KEY_ALIAS, encrypted);
 
-    KeyStoreHelper.createKeys(context, KEYSTORE_PASSWORD.name());
-    String pass = KeyStoreHelper.getSigningKey(KEYSTORE_PASSWORD.name());
+    KeyStoreSecurely.createKeys(context, KEYSTORE_PASSWORD.name());
+    String pass = KeyStoreSecurely.getSigningKey(KEYSTORE_PASSWORD.name());
 * */

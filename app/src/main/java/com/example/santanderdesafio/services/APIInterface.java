@@ -1,4 +1,4 @@
-package com.example.santanderdesafio;
+package com.example.santanderdesafio.services;
 
 import com.example.santanderdesafio.login.LoginResponse;
 import retrofit2.Call;

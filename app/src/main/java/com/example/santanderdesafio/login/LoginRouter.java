@@ -23,7 +23,7 @@ public class LoginRouter implements LoginRouterInput, View.OnClickListener {
 
         if (activity.get().validationComponents()) {
 
-            activity.get().progressBar.setVisibility(View.VISIBLE);
+            activity.get().changeVisibilityProgress(View.VISIBLE);
 
             String user = activity.get().edtUser.getText().toString();
             String password = activity.get().edtPassoword.getText().toString();
@@ -33,7 +33,7 @@ public class LoginRouter implements LoginRouterInput, View.OnClickListener {
 
                 intent = determineNextScreen();
                 passDataToStatementScreen();
-                activity.get().progressBar.setVisibility(View.INVISIBLE);
+                activity.get().changeVisibilityProgress(View.INVISIBLE);
 
                 activity.get().startActivity(intent);
             }

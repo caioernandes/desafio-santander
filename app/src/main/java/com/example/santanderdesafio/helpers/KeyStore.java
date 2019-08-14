@@ -1,20 +1,20 @@
-package com.example.santanderdesafio.utils;
+package com.example.santanderdesafio.helpers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-public class Keystore {
-    private static Keystore store;
+public class KeyStore {
+    private static KeyStore store;
     private SharedPreferences sp;
     private static String filename = "Keys";
 
-    private Keystore(Context context) {
+    private KeyStore(Context context) {
         sp = context.getApplicationContext().getSharedPreferences(filename, 0);
     }
 
-    public static Keystore getInstance(Context context) {
+    public static KeyStore getInstance(Context context) {
         if (store == null) {
-            store = new Keystore(context);
+            store = new KeyStore(context);
         }
         return store;
     }

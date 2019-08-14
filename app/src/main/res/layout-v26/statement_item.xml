@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="6dp"
+        android:paddingHorizontal="16dp">
+
+    <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/cv">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+            <TextView
+                    android:text="Pagamento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtTitle"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="20sp"/>
+
+            <TextView
+                    android:text="Conta de Luz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtDesc"
+                    android:layout_below="@+id/txtTitle"
+                    android:layout_marginTop="10dp"
+                    android:textSize="20sp"/>
+
+            <TextView
+                    android:text="12/12/12"
+                    android:textColor="@android:color/darker_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtDate"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="16dp"/>
+
+            <TextView
+                    android:text="R$ 1.000,00"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtValue"
+                    android:layout_alignParentEnd="true"
+                    android:textSize="22sp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="9dp"
+                    android:layout_below="@+id/txtDate"/>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

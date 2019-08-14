@@ -77,4 +77,8 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityInp
     public void outputLogin(LoginResponse response) {
         loginResponse = response;
     }
+
+    public void changeVisibilityProgress(int visibility) {
+        progressBar.setVisibility(visibility);
+    }
 }

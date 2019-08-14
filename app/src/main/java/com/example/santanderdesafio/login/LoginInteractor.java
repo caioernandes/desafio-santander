@@ -1,8 +1,8 @@
 package com.example.santanderdesafio.login;
 
 import android.util.Log;
-import com.example.santanderdesafio.APIClient;
-import com.example.santanderdesafio.APIInterface;
+import com.example.santanderdesafio.services.APIClient;
+import com.example.santanderdesafio.services.APIInterface;
 import retrofit2.Call;
 
 import java.io.IOException;
