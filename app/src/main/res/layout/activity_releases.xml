@@ -7,24 +7,84 @@
         tools:context=".statements.StatementsActivity">
 
     <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="413dp"
+            android:layout_height="220dp"
             android:background="@color/colorPrimary"
             android:id="@+id/relativeLayout"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/frame_container"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+    >
+
+        <TextView
+                android:id="@+id/txtNameAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Jose da Silva Teste"
+                android:textSize="24sp"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="0dp"/>
+
+        <TextView
+                android:id="@+id/txtAccountLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:text="Conta"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_below="@+id/txtNameAccount"/>
+
+        <TextView
+                android:id="@+id/txtAgencyAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2050 / 01.111222-4"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:layout_marginTop="4dp"
+                android:layout_below="@+id/txtAccountLabel"
+                android:layout_marginStart="16dp"/>
+
+        <TextView
+                android:id="@+id/txtBalanceLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Saldo"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:layout_below="@+id/txtAgencyAccount"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"/>
+
+        <TextView
+                android:id="@+id/txtBalance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/white"
+                android:text="R$ 1.000,00"
+                android:textSize="24sp"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="16dp"
+                android:layout_below="@+id/txtBalanceLabel"/>
 
     </RelativeLayout>
 
     <FrameLayout
             android:id="@+id/frame_container"
-            android:layout_width="0dp"
-            android:layout_height="460dp"
+            android:layout_width="413dp"
+            android:layout_height="485dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.333"/>
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/relativeLayout"
+            app:layout_constraintVertical_bias="0.0"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
