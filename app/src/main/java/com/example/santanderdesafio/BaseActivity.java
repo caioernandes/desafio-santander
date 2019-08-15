@@ -6,7 +6,14 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import java.util.Objects;
+
 public abstract class BaseActivity extends AppCompatActivity {
+
+    protected void hideActionBar() {
+        Objects.requireNonNull(getSupportActionBar()).hide();
+    }
+
     protected void addFragment(@IdRes int containerViewId,
                                @NonNull Fragment fragment,
                                @NonNull String fragmentTag) {

@@ -3,6 +3,7 @@ package com.example.santanderdesafio.statements;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 
 public class StatementsModel implements Serializable {
 
@@ -35,7 +36,9 @@ public class StatementsModel implements Serializable {
     }
 
     public String getDate() {
-        return date;
+        String data = date.replaceAll("-", "/");
+        String[] s = data.split("/");
+        return s[2]+"/"+s[1]+"/"+s[0];
     }
 
     public void setDate(String date) {

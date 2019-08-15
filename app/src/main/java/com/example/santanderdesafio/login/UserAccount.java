@@ -19,7 +19,7 @@ public class UserAccount implements Serializable {
     private String agency;
 
     @SerializedName("balance")
-    private double balance;
+    private float balance;
 
     public int getUserId() {
         return userId;
@@ -53,11 +53,11 @@ public class UserAccount implements Serializable {
         this.agency = agency;
     }
 
-    public double getBalance() {
+    public float getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(float balance) {
         this.balance = balance;
     }
 
@@ -65,7 +65,7 @@ public class UserAccount implements Serializable {
 
     }
 
-    public UserAccount(int userId, String name, String bankAccount, String agency, double balance) {
+    public UserAccount(int userId, String name, String bankAccount, String agency, float balance) {
         this.userId = userId;
         this.name = name;
         this.bankAccount = bankAccount;

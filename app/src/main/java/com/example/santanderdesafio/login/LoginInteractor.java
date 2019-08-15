@@ -4,6 +4,8 @@ import android.util.Log;
 import com.example.santanderdesafio.services.APIClient;
 import com.example.santanderdesafio.services.APIInterface;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import java.io.IOException;
 
@@ -19,14 +21,23 @@ public class LoginInteractor implements LoginInteractorInput {
     @Override
     public void fetchLogin(LoginRequest loginRequest) {
 
-        try {
-            APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
-            Call<LoginResponse> call = apiInterface.login(loginRequest.user, loginRequest.password);
-            LoginResponse loginResponse = call.execute().body();
-            output.presentLoginMetaData(loginResponse);
-        } catch (IOException e) {
-            Log.e("erro " +  TAG, e.getMessage());
-            //todo chamar output de erro do login
-        }
+        APIInterface apiInterface = APIClient.getClient().create(APIInterface.class);
+        Call<LoginResponse> call = apiInterface.login(loginRequest.user, loginRequest.password);
+
+        call.enqueue(new Callback<LoginResponse>() {
+            @Override
+            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                if (response.isSuccessful()) {
+                    output.presentLoginMetaData(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginResponse> call, Throwable t) {
+
+            }
+        });
+
+        //LoginResponse loginResponse = call.execute().body();
     }
 }

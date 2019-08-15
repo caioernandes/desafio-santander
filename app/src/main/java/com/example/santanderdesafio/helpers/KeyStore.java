@@ -2,6 +2,9 @@ package com.example.santanderdesafio.helpers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Base64;
+
+import java.util.Objects;
 
 public class KeyStore {
     private static KeyStore store;
@@ -62,5 +65,24 @@ public class KeyStore {
         SharedPreferences.Editor editor = sp.edit();
         editor.remove(filename);
         editor.apply();
+    }
+
+    public void savePassword(String text) {
+        if (text.equals(""))
+            text = null;
+        else
+            text = Base64.encodeToString(text.getBytes(), Base64.DEFAULT);
+
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("password", text);
+        editor.apply();
+    }
+
+    public String getPassword() {
+        String pass = sp.getString("password", null);
+        if (pass != null && !Objects.equals(pass, "")) {
+            pass = new String(Base64.decode(pass, Base64.DEFAULT));
+        }
+        return pass;
     }
 }
